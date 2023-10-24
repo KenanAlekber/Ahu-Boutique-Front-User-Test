@@ -4,6 +4,8 @@ import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 import { ClipLoader } from 'react-spinners';
 import { ProductCard } from '../components/ProductCard';
+import Navbar from '../components/Navbar/Navbar';
+import CaptionCarousel from '../components/Slider';
 
 const Home = () => {
     const { productService } = useService();
@@ -19,14 +21,17 @@ const Home = () => {
     if (isLoading)
         <ClipLoader color="#36d7b7" />
 
-    console.log(productData);
-
     return (
-        <div>{
-            productData.map((pr) => (
-                <ProductCard data={pr} />
-            ))
-        }
+        <div>
+            <Navbar />
+            <CaptionCarousel />
+            <div className='d-flex'>
+                {
+                    productData.map((pr) => (
+                        <ProductCard data={pr} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

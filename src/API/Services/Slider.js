@@ -7,7 +7,7 @@ export class SliderService extends HttpClient {
     }
 
     async getAllSliders() {
-        return await this.get(`api/Slider`);
+        return await this.get(`api/Slider/all`);
     }
 
     async getSliderItemById(id) {

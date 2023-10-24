@@ -65,7 +65,7 @@ export function ProductCard({ id, name, description, salePrice, costPrice, disco
                 {data.isNew && (
                     <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />
                 )}
-                <Image src={"http://localhost:7094/uploads/products/5d8db837-89bd-4361-84c6-b2b6f295ae36download (1).webp"} alt={`Picture of ${name}`} roundedTop="lg" />
+                <Image src={"https://localhost:7094/uploads/products/5d8db837-89bd-4361-84c6-b2b6f295ae36download(1).webp"} alt={`Picture of ${name}`} roundedTop="lg" />
                 {/* <Image src={"http://localhost:3000/" + posterImage.posterImageUrl} alt={`Picture of ${name}`} roundedTop="lg" /> */}
 
                 <Box p="6">
