@@ -3,9 +3,9 @@ import { useService } from '../../API/Services'
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 import { ClipLoader } from 'react-spinners';
-import { ProductCard } from '../components/ProductCard';
+import ProductAddToCart, { ProductCard } from '../components/Product/ProductCard';
 import Navbar from '../components/Navbar/Navbar';
-import CaptionCarousel from '../components/Slider';
+import CaptionCarousel from '../components/Slider/Slider';
 
 const Home = () => {
     const { productService } = useService();
@@ -25,10 +25,10 @@ const Home = () => {
         <div>
             <Navbar />
             <CaptionCarousel />
-            <div className='d-flex'>
+            <div className='product-flex'>
                 {
-                    productData.map((pr) => (
-                        <ProductCard data={pr} />
+                    productData.map((data) => (
+                        <ProductAddToCart data={data} />
                     ))
                 }
             </div>

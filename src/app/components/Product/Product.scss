@@ -1,0 +1,11 @@
+.product-flex {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.discounted-product {
+    text-decoration: line-through !important;
+}

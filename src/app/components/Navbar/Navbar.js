@@ -1,4 +1,4 @@
-
+import "../Navbar/navbar.scss"
 import {
     Box,
     Flex,
@@ -27,7 +27,7 @@ export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
-        <Box>
+        <Box className="navbar">
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
@@ -55,7 +55,9 @@ export default function Navbar() {
                         textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                         fontFamily={'heading'}
                         color={useColorModeValue('gray.800', 'white')}>
-                        <img src="https://ahuboutique.com/cdn/shop/files/ahu-logo.png?v=1613551579" className='nav-logo' />
+                        <a href="../">
+                            <img src="https://ahuboutique.com/cdn/shop/files/ahu-logo.png?v=1613551579" className='nav-logo' />
+                        </a>
                     </Text>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -237,41 +239,143 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
     {
-        label: 'Inspiration',
+        label: 'Clother',
         children: [
             {
-                label: 'Explore Design Work',
-                subLabel: 'Trending Design to inspire you',
+                label: 'Topwear',
                 href: '#',
             },
             {
-                label: 'New & Noteworthy',
-                subLabel: 'Up-and-coming Designers',
+                label: 'Shirt',
+                href: '#',
+            },
+            {
+                label: 'Jeans',
+                href: '#',
+            },
+            {
+                label: 'Dresses',
+                href: '#',
+            },
+            {
+                label: 'Knitwear',
+                href: '#',
+            },
+            {
+                label: 'Jeckets',
+                href: '#',
+            },
+            {
+                label: 'Trausers',
+                href: '#',
+            },
+            {
+                label: 'Skirt',
+                href: '#',
+            },
+            {
+                label: 'Outherwear',
                 href: '#',
             },
         ],
     },
     {
-        label: 'Find Work',
+        label: 'Shoes',
         children: [
             {
-                label: 'Job Board',
-                subLabel: 'Find your dream design job',
+                label: 'Sneakers',
                 href: '#',
             },
             {
-                label: 'Freelance Projects',
-                subLabel: 'An exclusive list for contract work',
+                label: 'Boots and Booties',
+                href: '#',
+            },
+            {
+                label: 'Flats',
+                href: '#',
+            },
+            {
+                label: 'Pumps',
+                href: '#',
+            },
+            {
+                label: 'Sandals',
+                href: '#',
+            },
+            {
+                label: 'Lace-up',
+                href: '#',
+            },
+            {
+                label: 'Moccasin',
                 href: '#',
             },
         ],
     },
     {
-        label: 'Learn Design',
-        href: '#',
+        label: 'Bags',
+        children: [
+            {
+                label: 'Tote bags',
+                href: '#',
+            },
+            {
+                label: 'Clutches bags',
+                href: '#',
+            },
+            {
+                label: 'Backpack',
+                href: '#',
+            },
+            {
+                label: 'Belt bags',
+                href: '#',
+            },
+            {
+                label: 'Hand bags',
+                href: '#',
+            },
+            {
+                label: 'Mini bags',
+                href: '#',
+            },
+            {
+                label: 'Crossbody / Shoulder bags',
+                href: '#',
+            },
+        ],
     },
     {
-        label: 'Hire Designers',
+        label: 'Accessories',
+        children: [
+            {
+                label: 'Scarvers',
+                href: '#',
+            },
+            {
+                label: 'Hats',
+                href: '#',
+            },
+            {
+                label: 'Gloves',
+                href: '#',
+            },
+            {
+                label: 'Wallet',
+                href: '#',
+            },
+            {
+                label: 'Wallet',
+                href: '#',
+            },
+            {
+                label: 'Belt',
+                href: '#',
+            },
+        ],
+    },
+    {
+        label: 'About',
         href: '#',
     },
 ]
