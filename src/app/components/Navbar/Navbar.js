@@ -1,50 +1,22 @@
 import "../Navbar/navbar.scss"
 import {
-    Box,
-    Flex,
-    Text,
-    IconButton,
-    Button,
-    Stack,
-    Collapse,
-    Icon,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    useColorModeValue,
-    useBreakpointValue,
-    useDisclosure,
-    background,
+    Box, Flex, Text, Button, Stack, Icon, Collapse, Popover, IconButton, useDisclosure, PopoverTrigger, PopoverContent,
+    useColorModeValue, useBreakpointValue
 } from '@chakra-ui/react'
-import {
-    HamburgerIcon,
-    CloseIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-} from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon, } from '@chakra-ui/icons'
 
 export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure()
 
     return (
         <Box className="navbar">
-            <Flex
+            <Flex minH={'60px'} py={{ base: 2 }} px={{ base: 4 }} borderBottom={1} borderStyle={'solid'} align={'center'}
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
-                minH={'60px'}
-                py={{ base: 2 }}
-                px={{ base: 4 }}
-                borderBottom={1}
-                borderStyle={'solid'}
-                borderColor={useColorModeValue('gray.200', 'gray.900')}
-                align={'center'}>
-                <Flex
-                    flex={{ base: 1, md: 'auto' }}
-                    ml={{ base: -2 }}
-                    display={{ base: 'flex', md: 'none' }}>
-                    <IconButton
-                        onClick={onToggle}
-                        icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+                borderColor={useColorModeValue('gray.200', 'gray.900')}>
+
+                <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
+                    <IconButton onClick={onToggle} icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
                         variant={'ghost'}
                         aria-label={'Toggle Navigation'}
                     />
@@ -55,7 +27,8 @@ export default function Navbar() {
                         textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                         fontFamily={'heading'}
                         color={useColorModeValue('gray.800', 'white')}>
-                        <a href="../">
+
+                        <a href="">
                             <img src="https://ahuboutique.com/cdn/shop/files/ahu-logo.png?v=1613551579" className='nav-logo' />
                         </a>
                     </Text>
@@ -65,25 +38,13 @@ export default function Navbar() {
                     </Flex>
                 </Flex>
 
-                <Stack
-                    flex={{ base: 1, md: 0 }}
-                    justify={'flex-end'}
-                    direction={'row'}
-                    spacing={6}>
-                    <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
+                <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
+                    <Button as={'a'} fontSize={'l'} fontWeight={400} variant={'link'} href={'#'}>
                         Sign In
                     </Button>
-                    <Button
-                        as={'a'}
-                        display={{ base: 'none', md: 'inline-flex' }}
-                        fontSize={'sm'}
-                        fontWeight={600}
-                        color={'white'}
-                        bg={'pink.400'}
-                        href={'#'}
-                        _hover={{
-                            bg: 'pink.300',
-                        }}>
+
+                    <Button as={'a'} fontSize={'sm'} fontWeight={600} color={'white'} bg={'red'} href={'#'}
+                        display={{ base: 'none', md: 'inline-flex' }} _hover={{ bg: 'red.400', }}>
                         Sign Up
                     </Button>
                 </Stack>
@@ -103,33 +64,22 @@ const DesktopNav = () => {
 
     return (
         <Stack direction={'row'} spacing={4}>
+
             {NAV_ITEMS.map((navItem) => (
+
                 <Box key={navItem.label}>
+
                     <Popover trigger={'hover'} placement={'bottom-start'}>
+
                         <PopoverTrigger>
-                            <Box
-                                as="a"
-                                p={2}
-                                href={navItem.href ?? '#'}
-                                fontSize={'sm'}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}>
+                            <Box as="a" p={2} href={navItem.href ?? '#'} fontSize={'sm'} fontWeight={500} color={linkColor}
+                                _hover={{ textDecoration: 'none', color: linkHoverColor }}>
                                 {navItem.label}
                             </Box>
                         </PopoverTrigger>
 
                         {navItem.children && (
-                            <PopoverContent
-                                border={0}
-                                boxShadow={'xl'}
-                                bg={popoverContentBgColor}
-                                p={4}
-                                rounded={'xl'}
-                                minW={'sm'}>
+                            <PopoverContent border={0} boxShadow={'xl'} p={4} rounded={'xl'} minW={'sm'} bg={popoverContentBgColor}>
                                 <Stack>
                                     {navItem.children.map((child) => (
                                         <DesktopSubNav key={child.label} {...child} />
@@ -146,32 +96,23 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
     return (
-        <Box
-            as="a"
-            href={href}
-            role={'group'}
-            display={'block'}
-            p={2}
-            rounded={'md'}
+        <Box as="a" href={href} role={'group'} display={'block'} p={2} rounded={'md'}
             _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+
             <Stack direction={'row'} align={'center'}>
+
                 <Box>
-                    <Text
-                        transition={'all .3s ease'}
-                        _groupHover={{ color: 'pink.400' }}
-                        fontWeight={500}>
+                    <Text transition={'all .3s ease'} _groupHover={{ color: 'pink.400' }} fontWeight={500}>
                         {label}
                     </Text>
+
                     <Text fontSize={'sm'}>{subLabel}</Text>
                 </Box>
-                <Flex
-                    transition={'all .3s ease'}
+
+                <Flex flex={1} align={'center'} justify={'flex-end'} opacity={0} transition={'all .3s ease'}
                     transform={'translateX(-10px)'}
-                    opacity={0}
-                    _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-                    justify={'flex-end'}
-                    align={'center'}
-                    flex={1}>
+                    _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}>
+
                     <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
                 </Flex>
             </Stack>
@@ -194,42 +135,24 @@ const MobileNavItem = ({ label, children, href }) => {
 
     return (
         <Stack spacing={4} onClick={children && onToggle}>
-            <Box
-                py={2}
-                as="a"
-                href={href ?? '#'}
-                justifyContent="space-between"
-                alignItems="center"
-                _hover={{
-                    textDecoration: 'none',
-                }}>
+            <Box py={2} as="a" href={href ?? '#'} justifyContent="space-between" alignItems="center" _hover={{ textDecoration: 'none' }}>
+
                 <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
                     {label}
                 </Text>
+
                 {children && (
-                    <Icon
-                        as={ChevronDownIcon}
-                        transition={'all .25s ease-in-out'}
-                        transform={isOpen ? 'rotate(180deg)' : ''}
-                        w={6}
-                        h={6}
-                    />
+                    <Icon as={ChevronDownIcon} w={6} h={6} transition={'all .25s ease-in-out'} transform={isOpen ? 'rotate(180deg)' : ''} />
                 )}
             </Box>
 
             <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-                <Stack
-                    mt={2}
-                    pl={4}
-                    borderLeft={1}
-                    borderStyle={'solid'}
-                    borderColor={useColorModeValue('gray.200', 'gray.700')}
-                    align={'start'}>
+                <Stack mt={2} pl={4} borderLeft={1} borderStyle={'solid'} align={'start'}
+                    borderColor={useColorModeValue('gray.200', 'gray.700')}>
+
                     {children &&
                         children.map((child) => (
-                            <Box as="a" key={child.label} py={2} href={child.href}>
-                                {child.label}
-                            </Box>
+                            <Box as="a" key={child.label} py={2} href={child.href}>{child.label}</Box>
                         ))}
                 </Stack>
             </Collapse>
@@ -239,140 +162,16 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
     {
-        label: 'Clother',
-        children: [
-            {
-                label: 'Topwear',
-                href: '#',
-            },
-            {
-                label: 'Shirt',
-                href: '#',
-            },
-            {
-                label: 'Jeans',
-                href: '#',
-            },
-            {
-                label: 'Dresses',
-                href: '#',
-            },
-            {
-                label: 'Knitwear',
-                href: '#',
-            },
-            {
-                label: 'Jeckets',
-                href: '#',
-            },
-            {
-                label: 'Trausers',
-                href: '#',
-            },
-            {
-                label: 'Skirt',
-                href: '#',
-            },
-            {
-                label: 'Outherwear',
-                href: '#',
-            },
-        ],
+        label: 'Home',
+        href: '#',
     },
     {
-        label: 'Shoes',
-        children: [
-            {
-                label: 'Sneakers',
-                href: '#',
-            },
-            {
-                label: 'Boots and Booties',
-                href: '#',
-            },
-            {
-                label: 'Flats',
-                href: '#',
-            },
-            {
-                label: 'Pumps',
-                href: '#',
-            },
-            {
-                label: 'Sandals',
-                href: '#',
-            },
-            {
-                label: 'Lace-up',
-                href: '#',
-            },
-            {
-                label: 'Moccasin',
-                href: '#',
-            },
-        ],
+        label: 'Shop',
+        href: '#',
     },
     {
-        label: 'Bags',
-        children: [
-            {
-                label: 'Tote bags',
-                href: '#',
-            },
-            {
-                label: 'Clutches bags',
-                href: '#',
-            },
-            {
-                label: 'Backpack',
-                href: '#',
-            },
-            {
-                label: 'Belt bags',
-                href: '#',
-            },
-            {
-                label: 'Hand bags',
-                href: '#',
-            },
-            {
-                label: 'Mini bags',
-                href: '#',
-            },
-            {
-                label: 'Crossbody / Shoulder bags',
-                href: '#',
-            },
-        ],
-    },
-    {
-        label: 'Accessories',
-        children: [
-            {
-                label: 'Scarvers',
-                href: '#',
-            },
-            {
-                label: 'Hats',
-                href: '#',
-            },
-            {
-                label: 'Gloves',
-                href: '#',
-            },
-            {
-                label: 'Wallet',
-                href: '#',
-            },
-            {
-                label: 'Wallet',
-                href: '#',
-            },
-            {
-                label: 'Belt',
-                href: '#',
-            },
-        ],
+        label: 'Contact',
+        href: '#',
     },
     {
         label: 'About',

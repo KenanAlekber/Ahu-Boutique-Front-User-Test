@@ -6,6 +6,7 @@ import { ClipLoader } from 'react-spinners';
 import ProductAddToCart, { ProductCard } from '../components/Product/ProductCard';
 import Navbar from '../components/Navbar/Navbar';
 import CaptionCarousel from '../components/Slider/Slider';
+import Hero from '../components/Hero/Hero';
 
 const Home = () => {
     const { productService } = useService();
@@ -32,6 +33,7 @@ const Home = () => {
                     ))
                 }
             </div>
+            <Hero />
         </div>
     )
 }
