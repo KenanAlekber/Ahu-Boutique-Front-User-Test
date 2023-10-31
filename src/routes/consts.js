@@ -5,5 +5,8 @@ export const ROUTES = {
     },
     MAIN: {
         HOME: "/"
+    },
+    PRODUCT: {
+        DETAIL: "/product/detail"
     }
 }

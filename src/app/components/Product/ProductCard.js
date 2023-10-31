@@ -2,6 +2,8 @@ import "../Product/product.scss"
 import { Flex, Circle, Box, Image, Badge, useColorModeValue, Icon, chakra, Tooltip, } from '@chakra-ui/react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi'
+import { useNavigate } from "react-router-dom"
+import { ROUTES } from "../../../routes/consts"
 
 function Rating({ rate, numReviews }) {
     return (
@@ -26,9 +28,10 @@ function Rating({ rate, numReviews }) {
 }
 
 function ProductAddToCart({ data }) {
+    const navigate = useNavigate();
     const { id, name, rate, salePrice, discountPercent, brand, posterImage } = data;
     return (
-        <Flex key={id} my={2} w="25%" alignItems="center" justifyContent="center">
+        <Flex onClick={() => navigate(ROUTES.PRODUCT.DETAIL, { state: { id } })} key={id} my={2} w="25%" alignItems="center" justifyContent="center">
             <Box className="product-card"
                 bg={useColorModeValue('white', 'gray.800')} maxW="sm" borderWidth="1px" rounded="lg" shadow="lg" position="relative">
 
@@ -46,12 +49,7 @@ function ProductAddToCart({ data }) {
                     </Box>
 
                     <Flex mt="1" justifyContent="space-between" alignContent="center">
-                        <Box
-                            fontSize="2xl"
-                            fontWeight="semibold"
-                            as="h4"
-                            lineHeight="tight"
-                            isTruncated>
+                        <Box fontSize="2xl" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
                             {name}
                         </Box>
 

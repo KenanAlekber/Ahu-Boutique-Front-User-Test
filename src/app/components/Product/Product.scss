@@ -2,8 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
-    padding: 200px 50px 0;
+    padding: 100px 50px;
 
     .product-card {
         width: 84%;
@@ -19,12 +20,16 @@
                 transition: 0.7s;
             }
         }
-
-        .discounted-product {
-            text-decoration: line-through !important;
-            padding-left: 7px;
-        }
     }
+
+    // .css-6gr56j{
+    //     width: 25% !important;
+    // }
+}
+
+.discounted-product {
+    text-decoration: line-through !important;
+    padding-left: 7px;
 }
 
 @media(max-width: 1300px) {

@@ -3,10 +3,12 @@ import { useService } from '../../API/Services'
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 import { ClipLoader } from 'react-spinners';
-import ProductAddToCart, { ProductCard } from '../components/Product/ProductCard';
+import ProductAddToCart from '../components/Product/ProductCard';
 import Navbar from '../components/Navbar/Navbar';
 import CaptionCarousel from '../components/Slider/Slider';
 import Hero from '../components/Hero/Hero';
+import Footer from '../components/Footer/Footer';
+import Image from '../components/ImageSection/Image';
 
 const Home = () => {
     const { productService } = useService();
@@ -28,12 +30,21 @@ const Home = () => {
             <CaptionCarousel />
             <div className='product-flex'>
                 {
-                    productData.map((data) => (
+                    productData.slice(0, 8).map((data) => (
                         <ProductAddToCart data={data} />
                     ))
                 }
             </div>
             <Hero />
+            <div className='product-flex'>
+                {
+                    productData.slice(4, 8).map((data) => (
+                        <ProductAddToCart data={data} />
+                    ))
+                }
+            </div>
+            <Image />
+            <Footer />
         </div>
     )
 }
