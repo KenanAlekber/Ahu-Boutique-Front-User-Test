@@ -10,28 +10,33 @@ import {
     Heading,
     SimpleGrid,
     StackDivider,
-    useColorModeValue,
     List,
     ListItem,
     Spinner,
 } from '@chakra-ui/react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useService } from '../../../API/Services';
 import { useQuery } from 'react-query';
 import React from 'react';
-import Footer from '../Footer/Footer';
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
+import Swal from 'sweetalert2';
+import { ROUTES } from '../../../routes/consts';
 
 export default function ProductDetail() {
     const location = useLocation();
+    const navigate = useNavigate();
     const { productService } = useService()
     const [productData, setProductData] = React.useState();
     const { isLoading } = useQuery([], () => {
-        productService.getProductById(location.state?.id).then(({ data }) => setProductData(data))
+        productService.getProductById(location.state?.id).then(({ data }) => setProductData(data)).catch(() => {
+            Swal.fire("Error", "This product not found", 'error')
+            navigate(ROUTES.MAIN.HOME)
+        })
     })
 
-    if (isLoading || productData == null)
-        <Spinner />
+    if (isLoading)
+        return <Spinner />
 
     return (
         <>
@@ -45,8 +50,7 @@ export default function ProductDetail() {
                         <Image
                             rounded={'md'}
                             alt={`Picture of ${productData?.name}`}
-                            // src={`https://localhost:7094/Product/${productData?.posterImage?.imageUrl}`}
-                            src='https://static.ticimax.cloud/cdn-cgi/image/width=472,quality=90,format=webp/30743/uploads/urunresimleri/buyuk/montici-kurklu-kot-mont-mavi-efe-46.jpg'
+                            src={`https://localhost:7094/${productData?.posterImage?.imageUrl}`}
                             fit={'cover'}
                             align={'center'}
                             w={'100%'}
@@ -62,15 +66,14 @@ export default function ProductDetail() {
                                 {productData?.name}
                             </Heading>
                             <Text
-                                color={useColorModeValue('gray.900', 'gray.400')}
-                                fontWeight={300}
+                                color={"#171923"}
+                                fontWeight={600}
                                 fontSize={'2xl'}>
                                 ${productData?.discountPercent > 0 ? (productData?.salePrice.toFixed(2) - (productData?.salePrice.toFixed(2) / 100) * productData?.discountPercent) : (productData?.salePrice.toFixed(2))}
                                 {productData?.discountPercent > 0 &&
                                     (<Box className='discounted-product' as="span" color={'red'} fontSize="lg">
                                         {productData?.salePrice.toFixed(2)}
                                     </Box>)
-
                                 }
                             </Text>
                         </Box>
@@ -79,7 +82,7 @@ export default function ProductDetail() {
                             spacing={{ base: 4, sm: 6 }}
                             direction={'column'}
                             divider={
-                                <StackDivider borderColor={useColorModeValue('gray.200', 'gray.600')} />
+                                <StackDivider borderColor={"gray.200"} />
                             }>
                             <VStack spacing={{ base: 4, sm: 6 }} alignItems={'flex-start'}>
                                 <Text fontSize={'lg'}>
@@ -89,7 +92,7 @@ export default function ProductDetail() {
                             <Box>
                                 <Text
                                     fontSize={{ base: '16px', lg: '18px' }}
-                                    color={useColorModeValue('yellow.500', 'yellow.300')}
+                                    color={"red"}
                                     fontWeight={'500'}
                                     textTransform={'uppercase'}
                                     mb={'4'}>
@@ -102,6 +105,18 @@ export default function ProductDetail() {
                                             Description:
                                         </Text>{' '}
                                         {productData?.description}
+                                    </ListItem>
+                                    <ListItem>
+                                        <Text as={'span'} fontWeight={'bold'}>
+                                            Brand:
+                                        </Text>{' '}
+                                        {productData?.brand.name}
+                                    </ListItem>
+                                    <ListItem>
+                                        <Text as={'span'} fontWeight={'bold'}>
+                                            Category:
+                                        </Text>{' '}
+                                        {productData?.category.name}
                                     </ListItem>
                                     <ListItem>
                                         <Text as={'span'} fontWeight={'bold'}>
@@ -131,10 +146,10 @@ export default function ProductDetail() {
                             mt={8}
                             size={'lg'}
                             py={'7'}
-                            bg={useColorModeValue('gray.900', 'gray.50')}
-                            color={useColorModeValue('white', 'gray.900')}
+                            bg={"red"}
+                            color={"white"}
                             textTransform={'uppercase'}
-                            _hover={{ transform: 'translateY(2px)', boxShadow: 'lg' }}>
+                            _hover={{ bg: 'white', color: 'red' }}>
                             Add to cart
                         </Button>
 

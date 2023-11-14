@@ -1,0 +1,20 @@
+.product-filter {
+    display: flex;
+    margin-left: 10px;
+
+    .brand-filter {
+        padding-bottom: 25px;
+    }
+
+    .category-filter {
+        padding-bottom: 25px;
+    }
+
+    .filter-text {
+        margin-left: 10px;
+    }
+}
+
+a {
+    cursor: pointer;
+}

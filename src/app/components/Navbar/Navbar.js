@@ -1,12 +1,29 @@
 import "../Navbar/navbar.scss"
 import {
     Box, Flex, Text, Button, Stack, Icon, Collapse, Popover, IconButton, useDisclosure, PopoverTrigger, PopoverContent,
-    useColorModeValue, useBreakpointValue
+    useColorModeValue, useBreakpointValue, useColorMode
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon, } from '@chakra-ui/icons'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { useNavigate } from "react-router-dom"
+import { ROUTES } from "../../../routes/consts"
+import { useMutation } from "react-query"
+import { useService } from "../../../API/Services"
 
 export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure()
+    const { colorMode, toggleColorMode } = useColorMode()
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const { authService } = useService()
+    const { mutateAsync: mutateLogOut } = useMutation(() => {
+        authService.logout()
+    })
+
+    const handleLogOut = () => {
+        mutateLogOut().then(() => navigate(ROUTES.USER.LOGIN))
+    }
 
     return (
         <Box className="navbar">
@@ -28,9 +45,9 @@ export default function Navbar() {
                         fontFamily={'heading'}
                         color={useColorModeValue('gray.800', 'white')}>
 
-                        <a href="">
-                            <img src="https://ahuboutique.com/cdn/shop/files/ahu-logo.png?v=1613551579" className='nav-logo' />
-                        </a>
+                        <button onClick={() => navigate(ROUTES.MAIN.HOME)}>
+                            <img src="https://ahuboutique.com/cdn/shop/files/ahu-logo.png?v=1613551579" alt="ahu-logo" className='nav-logo' />
+                        </button>
                     </Text>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -39,14 +56,32 @@ export default function Navbar() {
                 </Flex>
 
                 <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
-                    <Button as={'a'} fontSize={'l'} fontWeight={400} variant={'link'} href={'#'}>
-                        Sign In
+                    <Button onClick={toggleColorMode}>
+                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     </Button>
-
-                    <Button as={'a'} fontSize={'sm'} fontWeight={600} color={'white'} bg={'red'} href={'#'}
-                        display={{ base: 'none', md: 'inline-flex' }} _hover={{ bg: 'red.400', }}>
-                        Sign Up
-                    </Button>
+                    {
+                        user ? (
+                            <>
+                                <Button as={'a'} fontSize={'l'} fontWeight={400} variant={'link'} onClick={() => navigate(ROUTES.USER.LOGIN)}>
+                                    {user.userName}
+                                </Button>
+                                <Button as={'a'} fontSize={'sm'} fontWeight={600} color={'white'} bg={'red'} onClick={() => handleLogOut()}
+                                    display={{ base: 'none', md: 'inline-flex' }} _hover={{ bg: 'red.400', }}>
+                                    Log Out
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button as={'a'} fontSize={'l'} fontWeight={400} variant={'link'} onClick={() => navigate(ROUTES.USER.LOGIN)}>
+                                    Sign In
+                                </Button>
+                                <Button as={'a'} fontSize={'sm'} fontWeight={600} color={'white'} bg={'red'} onClick={() => navigate(ROUTES.USER.REGISTER)}
+                                    display={{ base: 'none', md: 'inline-flex' }} _hover={{ bg: 'red.400', }}>
+                                    Sign Up
+                                </Button>
+                            </>
+                        )
+                    }
                 </Stack>
             </Flex>
 
@@ -61,6 +96,7 @@ const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200')
     const linkHoverColor = useColorModeValue('gray.800', 'white')
     const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+    const navigate = useNavigate()
 
     return (
         <Stack direction={'row'} spacing={4}>
@@ -72,7 +108,7 @@ const DesktopNav = () => {
                     <Popover trigger={'hover'} placement={'bottom-start'}>
 
                         <PopoverTrigger>
-                            <Box as="a" p={2} href={navItem.href ?? '#'} fontSize={'sm'} fontWeight={500} color={linkColor}
+                            <Box as="a" p={2} onClick={() => navigate(navItem.href)} fontSize={'sm'} fontWeight={500} color={linkColor}
                                 _hover={{ textDecoration: 'none', color: linkHoverColor }}>
                                 {navItem.label}
                             </Box>
@@ -163,18 +199,18 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
     {
         label: 'Home',
-        href: '#',
+        href: '/',
     },
     {
         label: 'Shop',
-        href: '#',
+        href: '/shop',
     },
     {
         label: 'Contact',
-        href: '#',
+        href: '/contact',
     },
     {
-        label: 'About',
-        href: '#',
+        label: 'Order',
+        href: '/order',
     },
 ]

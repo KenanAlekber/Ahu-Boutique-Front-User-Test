@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import { useService } from '../../../API/Services'
 import { useQuery } from 'react-query'
 import { ClipLoader } from 'react-spinners';
-import "../Slider/slider.scss";
+import "./slider.scss";
 
 const settings = {
     dots: true,

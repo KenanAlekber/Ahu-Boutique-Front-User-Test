@@ -38,7 +38,7 @@ const Home = () => {
             <Hero />
             <div className='product-flex'>
                 {
-                    productData.slice(4, 8).map((data) => (
+                    productData.slice(8, 12).map((data) => (
                         <ProductAddToCart data={data} />
                     ))
                 }

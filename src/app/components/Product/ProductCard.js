@@ -1,4 +1,4 @@
-import "../Product/product.scss"
+import "./product.scss"
 import { Flex, Circle, Box, Image, Badge, useColorModeValue, Icon, chakra, Tooltip, } from '@chakra-ui/react'
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi'
@@ -30,8 +30,9 @@ function Rating({ rate, numReviews }) {
 function ProductAddToCart({ data }) {
     const navigate = useNavigate();
     const { id, name, rate, salePrice, discountPercent, brand, posterImage } = data;
+
     return (
-        <Flex onClick={() => navigate(ROUTES.PRODUCT.DETAIL, { state: { id } })} key={id} my={2} w="25%" alignItems="center" justifyContent="center">
+        <Flex my={2} w="25%" alignItems="center" justifyContent="center">
             <Box className="product-card"
                 bg={useColorModeValue('white', 'gray.800')} maxW="sm" borderWidth="1px" rounded="lg" shadow="lg" position="relative">
 
@@ -39,7 +40,9 @@ function ProductAddToCart({ data }) {
                     <Circle size="10px" position="absolute" top={2} right={2} bg="red" />
                 )}
 
-                <Image className="product-image" src={`https://localhost:7094/${posterImage?.imageUrl}`} alt={`Picture of ${name}`} roundedTop="lg" />
+                <Image onClick={() => navigate(ROUTES.PRODUCT.DETAIL, { state: { id } })} key={id}
+                    className="product-image" src={`https://localhost:7094/${posterImage?.imageUrl}`} alt={`Picture of ${name}`} roundedTop="lg"
+                />
 
                 <Box p="6">
                     <Box display="flex" alignItems="baseline">
@@ -77,7 +80,6 @@ function ProductAddToCart({ data }) {
                                 (<Box className='discounted-product' as="span" color={'red'} fontSize="lg">
                                     {salePrice.toFixed(2)}
                                 </Box>)
-
                             }
                         </Box>
                     </Flex>

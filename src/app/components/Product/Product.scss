@@ -8,12 +8,12 @@
 
     .product-card {
         width: 84%;
-        cursor: pointer;
-
+        
         .product-image {
             height: 400px;
             width: 100%;
             transition: 0.7s;
+            cursor: pointer;
 
             &:hover {
                 transform: scale(1.01);
@@ -22,9 +22,9 @@
         }
     }
 
-    // .css-6gr56j{
-    //     width: 25% !important;
-    // }
+    .css-6gr56j {
+        padding: 50px 0;
+    }
 }
 
 .discounted-product {

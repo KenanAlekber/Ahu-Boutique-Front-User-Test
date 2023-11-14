@@ -1,3 +1,4 @@
+import { AuthService } from "./Auth"
 import { BasketService } from "./Basket"
 import { BrandService } from "./Brand"
 import { CategoryService } from "./Category"
@@ -9,14 +10,15 @@ import { StoreDatasService } from "./StoreDatas"
 
 export const useService = () => {
     const services = {
-        productService: new ProductService(),
+        authService: new AuthService(),
+        basketService: new BasketService(),
         brandService: new BrandService(),
         categoryService: new CategoryService(),
         orderService: new OrderService(),
-        basketService: new BasketService(),
+        productService: new ProductService(),
         productReviewService: new ProductReviewService(),
         sliderService: new SliderService(),
-        storeDataService: new StoreDatasService(),
+        storeDataService: new StoreDatasService()
     }
     return services
 }

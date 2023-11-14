@@ -1,10 +1,10 @@
 import React from 'react'
-import '../ImageSection/image.scss'
+import './image.scss'
 
 export function Image() {
   return (
     <div className='image'>
-      <img className='image-image' />
+      <Image className='image-image' />
     </div>
   )
 }
